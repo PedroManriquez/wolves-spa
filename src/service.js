@@ -1,13 +1,11 @@
-import Vue from 'vue'
 import axios from 'axios'
-
-Vue.use(axios)
 
 class Service {
   constructor (name) {
     this.resource = axios.create({
       baseURL: process.env.address.api + name
     })
+    this.resource.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
   }
   query () {
     return this.resource.get()
@@ -26,12 +24,6 @@ class Service {
   }
   getAddress () {
     return process.env.address
-  }
-  getResource () {
-    return this.resource
-  }
-  getVueInstance () {
-    return Vue
   }
 }
 

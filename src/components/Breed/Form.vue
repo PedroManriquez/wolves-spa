@@ -10,13 +10,10 @@
 </template>
 <script>
 import Axios from 'axios'
+
+const url = process.env.address.api + 'breeds'
+
 export default {
-  props: {
-    breedService: {
-      type: Object,
-      default: undefined
-    }
-  },
   data: () => ({
     breed: {
       name: ''
@@ -25,7 +22,7 @@ export default {
   methods: {
     onSubmit () {
       this.$message.info(JSON.stringify(this.breed))
-      Axios.post(process.env.address.api + 'breeds', this.breed)
+      Axios.post(url, this.breed)
         .then(response => {
           this.$message.info('A new Wolf-Breed Created successfully!')
           console.log(response)

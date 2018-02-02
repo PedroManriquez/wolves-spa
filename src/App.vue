@@ -1,31 +1,47 @@
 <template>
-  <div id="app">
-    <div class="logo">
-      <img src="/static/wolf.png">
-    </div>
-    <router-view/>
-  </div>
+  <el-container>
+    <side-nav :open="open"></side-nav>
+    <el-container style="height: calc(100vh)">
+      <el-header style="padding: 0px;">
+        <nav-bar v-on:toggleSideNav="toggleNav"></nav-bar>
+      </el-header>
+      <el-main>
+        <router-view/>
+      </el-main>
+      <main-footer></main-footer>
+    </el-container>
+  </el-container>
 </template>
-
 <script>
+
+import NavBar from '@/ui-components/Dashboard/Navbar'
+import SideNav from '@/ui-components/Dashboard/Sidenav'
+import MainFooter from '@/ui-components/Dashboard/Footer'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    NavBar,
+    SideNav,
+    MainFooter
+  },
+  data: () => ({
+    open: false
+  }),
+  methods: {
+    toggleNav () {
+      this.open = !this.open
+    }
+  }
 }
 </script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 2em;
-}
-.logo {
-  text-align: center;
-  margin-bottom: 0.8em;
-}
-.logo img {
-  width: 15em;
-}
+  body {
+    margin: 0px;
+    background: rgb(238, 238, 238);
+  }
+  .title {
+    color: #CECECE;
+    padding-left: 4.5em;
+  }
 </style>
